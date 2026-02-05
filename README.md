@@ -1,4 +1,4 @@
-# 🚀 Retrieval-First RAG Hackathon Solution
+# 🚀 Retrieval-First RAG Solution
 
 ## 📌 Table of Contents
 - [Introduction](#introduction)
