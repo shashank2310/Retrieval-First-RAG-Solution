@@ -42,8 +42,8 @@ This project is a modular Retrieval-Augmented Generation (RAG) pipeline for the 
 ## ⚡ Setup & How to Run
 1. Clone the repository
    ```sh
-   git clone https://github.com/eft-hackathon/hackathon2-ai-explorers.git
-   cd hackathon2-ai-explorers
+   git clone repo
+   
    ```
 2. Install dependencies
    ```sh
