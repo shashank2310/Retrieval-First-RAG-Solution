@@ -1,0 +1,31 @@
+{
+  "architecture": "The pipeline follows a RAG (Retrieval-Augmented Generation) architecture: preprocessing → chunking → embedding → vector store indexing → retrieval → answer generation. Articles are loaded and chunked, embedded using OpenAI, indexed in FAISS, and retrieved using hybrid (vector + BM25) search. Retrieved chunks are passed to an LLM for answer generation.",
+  "design_decisions": {
+    "chunking_strategy": "Semantic chunking with overlap to preserve context and improve retrieval accuracy.",
+    "vector_store_selection": "FAISS selected for fast, scalable similarity search and local resource efficiency.",
+    "embedding_model_choice": "OpenAI text-embedding-3-small for high-quality, cost-effective embeddings.",
+    "retrieval_approach": "Hybrid retrieval (vector + BM25) with reciprocal rank fusion for robust recall and precision.",
+    "batched_embedding_generation": "Embeddings are generated in batches to optimize API usage and reduce latency.",
+    "cost_optimization": "Batching, confidence thresholds, and top-K filtering reduce API calls and LLM usage. Only top relevant chunks are sent to the LLM."
+  },
+  "api_usage_and_cost_analysis": {
+    "apis_used": "OpenAI Embeddings, OpenAI ChatCompletion (LLM)",
+    "cost_estimate": "Embedding cost is minimized by batching. LLM cost is controlled by limiting context size and chunk count. Typical run: < $1 for 50 questions.",
+    "optimization_strategies": "Batching, top-K filtering, confidence threshold, hybrid retrieval to minimize unnecessary API calls."
+  },
+  "tradeoffs": {
+    "accuracy_vs_speed_vs_cost": "Hybrid retrieval increases accuracy but adds compute. Semantic chunking improves answer quality but increases embedding cost. Top-K and confidence threshold balance cost and recall."
+  },
+  "limitations": [
+    "LLM answers may not always match sample output verbatim.",
+    "Retrieval may miss relevant context if chunking is imperfect.",
+    "API rate limits and quota may affect large-scale runs.",
+    "No support for video demo generation."
+  ],
+  "future_improvements": [
+    "Fine-tune chunking and retrieval for better sample output matching.",
+    "Add support for more embedding providers and vector stores.",
+    "Implement caching for embeddings and retrieval results.",
+    "Add UI for visualizing retrieval traces and matched text."
+  ]
+}

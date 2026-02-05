@@ -1,0 +1,22 @@
+# General pipeline configuration
+chunk:
+  size: 400  # tokens
+  overlap: 80  # tokens
+  strategy: semantic  # options: fixed, semantic
+embedding:
+  provider: openai
+  model: text-embedding-3-small
+  batch_size: 100
+vector_store:
+  type: faiss  # options: faiss, chroma
+  index: flat  # options: flat, hnsw
+retrieval:
+  strategy: hybrid  # options: vector, bm25, hybrid
+  fusion: reciprocal_rank
+  top_k: 5
+confidence:
+  threshold: 0.75
+api:
+  rate_limit: 60  # requests/min
+  retry: 3
+seed: 42
